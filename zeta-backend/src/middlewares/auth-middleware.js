@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const { User } = require('../models/User');
 
 const authenticate = async (req, res, next) => {
     try {
@@ -33,8 +33,10 @@ const authenticate = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        error.statusCode = 401;
-        error.message = 'Invalid or expired token';
+        if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+            error.statusCode = 401;
+            error.message = 'Invalid or expired token';
+        }
         next(error);
     }
 };

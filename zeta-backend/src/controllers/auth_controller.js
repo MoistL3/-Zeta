@@ -2,11 +2,11 @@ const auth_service = require('../services/auth_service.js')
 
 const register_user = async (req,res,next)=>{
     try{
-    const result = await auth_service.register_user(req.body);
-    res.statusCode(200).json({
-        status:'success' ,
-        data : res
-    })}catch (error){
+        const result = await auth_service.register_user(req.body);
+        res.status(201).json({
+            status:'success' ,
+            data : result
+        })}catch (error){
         next(error);
     }
 }
@@ -14,7 +14,7 @@ const register_user = async (req,res,next)=>{
 const login_user = async (req,res,next)=>{
     try{
         const result = await auth_service.login_user(req.body);
-        res.statusCode(200).json({
+        res.status(200).json({
             status:'success' ,
             data : result
         })

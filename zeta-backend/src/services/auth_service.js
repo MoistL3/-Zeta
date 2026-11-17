@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs') ;
 const jwt = require('jsonwebtoken')
-const User = require('../models/User');
-const e = require("express");
+const { User } = require('../models/User');
 
 
 const generate_token = (user_id)=>{
@@ -9,8 +8,8 @@ const generate_token = (user_id)=>{
     if(!secret){
         throw new Error('JWT_SECRET is missing in .env');
     }
-    return jwt.sign({id : {user_id}},secret,{
-        expires_in: process.env.JWT_EXPIRES_IN
+    return jwt.sign({ id : user_id },secret,{
+        expiresIn: process.env.JWT_EXPIRES_IN || '1d'
     })
 }
 // بنخلي يوزر جديد يخش بالايميل بتاعه
@@ -30,10 +29,10 @@ const register_user = async ({ name, email, password, role }) => {
     })
     const token = generate_token(user._id)
     return {
-        User :{
+        user :{
+            id: user._id ,
             name: user.name ,
             email: user.email ,
-            password:hashed_password ,
             role:user.role
         } ,
         token
@@ -48,7 +47,7 @@ const login_user = async({email,password})=>{
         throw error ;
     }
     const user = await User.findOne({email}).select('+password') ;
-    const valid_password = user && bcrypt.compare(user.password , password) ;
+    const valid_password = user && await bcrypt.compare(password , user.password) ;
     if(!valid_password){
         const error = new Error('Invalid email or password') ;
         error.statusCode=401 ;

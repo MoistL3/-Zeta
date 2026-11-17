@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zeta - Login</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1e293b; padding: 2rem; border-radius: 10px; width: 320px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        h2 { margin-top: 0; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; margin-top: 12px; border: none; border-radius: 6px; background: #3b82f6; color: white; font-weight: bold; cursor: pointer; }
+        button:hover { background: #2563eb; }
+        .error { color: #f87171; font-size: 0.9rem; margin-top: 10px; text-align: center; min-height: 20px; }
+        .link { text-align: center; margin-top: 15px; font-size: 0.9rem; }
+        a { color: #60a5fa; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Welcome Back</h2>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+    </form>
+    <div id="error-msg" class="error"></div>
+    <div class="link">Don't have an account? <a href="signup.html">Sign Up</a></div>
+</div>
+
+<script src="./JS/auth.js"></script>
+</body>
+</html>

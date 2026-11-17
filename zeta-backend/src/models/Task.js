@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 
 const taskSchema = mongoose.Schema({
@@ -47,4 +47,5 @@ const taskSchema = mongoose.Schema({
 )
 
 taskSchema.index({ assignedTo: 1, status: 1 });
-export const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model('Task', taskSchema);
+module.exports={Task}
